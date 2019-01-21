@@ -4,12 +4,14 @@ import { createCollection } from '../../store/actions/collectionActions';
 import { Redirect } from 'react-router-dom';
 import firebase from 'firebase/app';
 import 'firebase/storage';
+import { Button, Row, Col } from 'react-materialize';
 
 class CreateCollection extends Component {
   state = {
     status:'inativo',
     title: '',
     description: '',
+    pdf:'',
     image1: '',
     image2: '',
     uploadValue: 0
@@ -30,18 +32,24 @@ class CreateCollection extends Component {
         message: `Ocorreu um erro: ${error.message}`
       })
     }, () => {
-      task.snapshot.ref.getDownloadURL().then((urlImage)=> {
+      task.snapshot.ref.getDownloadURL().then((urlfile)=> {
         switch(fileId){
+          case 'pdf':
+            return (
+              this.setState({
+                pdf: urlfile
+              })
+            );
           case 'image1':
             return (
               this.setState({
-                image1: urlImage
+                image1: urlfile
               })
             );
           case 'image2':
             return (
               this.setState({
-                image2: urlImage
+                image2: urlfile
               })
             );
           default:
@@ -73,6 +81,14 @@ class CreateCollection extends Component {
     return (
       <div className="container">
         <form onSubmit={this.handleSubmit} className="white">
+          {this.state.uploadValue === 0 || this.state.uploadValue===100 ? null :
+            <div>
+              <span>Carregando arquivo...</span>
+              <div className="progress">
+                <div className="determinate" style={{width: this.state.uploadValue+"%"}}></div>
+              </div>
+            </div>
+          }
           <h5 className="grey-text text-darken-3">Nova Coleção</h5>
           <div className="input-field">
             <label htmlFor="title">Titulo</label>
@@ -84,34 +100,60 @@ class CreateCollection extends Component {
             </textarea>
           </div>
 
-          <div className="file-field input-field">
-            <div className="btn">
-              <span>Capa 1</span>
-              <input type="file" id="image1" onChange={this.fileSelectedHandler}/>
-            </div>
-            <div className="file-path-wrapper">
-              <input className="file-path validate" type="text" placeholder="Imagem da Capa 1"/>
-            </div>
-            <div>
-              <img className="responsive-img" src={this.state.image1} alt="" />
-            </div>
-          </div>
+          <Row>
+              <Col s={9}>
+                <div className="file-field input-field">
+                  <div className="btn">
+                    <span>PDF</span>
+                    <input type="file" id="pdf" onChange={this.fileSelectedHandler}/>
+                  </div>
+                  <div className="file-path-wrapper">
+                    <input className="file-path validate" type="text" defaultValue={this.state.pdf} placeholder="PDF da Coleção"/>
+                  </div>
+                </div>
+              </Col>
+              <Col s={3}>
+                {this.state.pdf ?<Button waves='light' className="info right" node='a' href={this.state.pdf}> Ver PDF </Button>:null}
+              </Col>
+            </Row>
 
-          <div className="file-field input-field">
-            <div className="btn">
-              <span>Capa 2</span>
-              <input type="file" id="image2" onChange={this.fileSelectedHandler}/>
-            </div>
-            <div className="file-path-wrapper">
-              <input className="file-path validate" type="text" placeholder="Imagem da Capa 2"/>
-            </div>
-            <div>
-              <img className="responsive-img" src={this.state.image2} alt="" />
-            </div>
-          </div>
-          <div className="progress">
-            <div className="determinate" style={{width: this.state.uploadValue+"%"}}></div>
-          </div>
+            <Row>
+              <Col s={6}>
+                <div className="file-field input-field">
+                  <div className="btn">
+                    <span>Capa 1</span>
+                    <input type="file" id="image1" onChange={this.fileSelectedHandler}/>
+                  </div>
+                  <div className="file-path-wrapper">
+                    <input className="file-path validate" type="text" placeholder="Imagem da Capa 1"/>
+                  </div>
+                </div>
+              </Col>
+              <Col s={6}>
+                <div className="file-field input-field">
+                    <div className="btn">
+                      <span>Capa 2</span>
+                      <input type="file" id="image2" onChange={this.fileSelectedHandler}/>
+                    </div>
+                    <div className="file-path-wrapper">
+                      <input className="file-path validate" type="text" placeholder="Imagem da Capa 2"/>
+                    </div>
+                </div>
+              </Col>
+            </Row>
+
+            <Row>
+              <Col s={6}>
+                <div className="file-field input-field">
+                  <img className="responsive-img" src={this.state.image1} alt="" />
+                </div>
+              </Col>
+              <Col s={6}>
+                <div className="file-field input-field">
+                  <img className="responsive-img" src={this.state.image2} alt="" />
+                </div>
+              </Col>
+            </Row>
 
           <div className="input-field">
             <button className="btn pink lighten-1 z-depth-0">Salvar</button>

@@ -6,12 +6,14 @@ import { editCollection } from '../../store/actions/collectionActions';
 import { Redirect } from 'react-router-dom';
 import firebase from 'firebase/app';
 import 'firebase/storage';
+import { Row, Col, Preloader } from 'react-materialize';
 
 class EditCollection extends Component {
   state = {
     status:'',
     title: '',
     description: '',
+    pdf: '',
     image1: '',
     image2: '',
     uploadValue: 0
@@ -27,8 +29,10 @@ class EditCollection extends Component {
           status: collection.status,
           title: collection.title,
           description: collection.description,
+          pdf: collection.pdf,
           image1: collection.image1,
-          image2: collection.image2
+          image2: collection.image2,
+          uploadValue: 0
         });
       } else {
         console.log("No such document!");
@@ -51,18 +55,24 @@ class EditCollection extends Component {
         message: `Ocorreu um erro: ${error.message}`
       })
     }, () => {
-      task.snapshot.ref.getDownloadURL().then((urlImage)=> {
+      task.snapshot.ref.getDownloadURL().then((urlfile)=> {
         switch(fileId){
+          case 'pdf':
+            return (
+              this.setState({
+                pdf: urlfile
+              })
+            );
           case 'image1':
             return (
               this.setState({
-                image1: urlImage
+                image1: urlfile
               })
             );
           case 'image2':
             return (
               this.setState({
-                image2: urlImage
+                image2: urlfile
               })
             );
           default:
@@ -97,6 +107,15 @@ class EditCollection extends Component {
       return (
         <div className="container">
           <form onSubmit={this.handleSubmit} className="white">
+            {this.state.uploadValue === 0 || this.state.uploadValue===100 ? null :
+              <div>
+              <span>Carregando arquivo...</span>
+                <div className="progress">
+                  <div className="determinate" style={{width: this.state.uploadValue+"%"}}></div>
+                </div>
+              </div>
+            }
+
             <h5 className="grey-text text-darken-3">Editar Coleção</h5>
             <div className="input-field">
               {title ? null : <label htmlFor="title">Titulo</label>}
@@ -108,40 +127,66 @@ class EditCollection extends Component {
               </textarea>
             </div>
 
-            <div className="file-field input-field">
-              <div className="btn">
-                <span>Capa 1</span>
-                <input type="file" id="image1" onChange={this.fileSelectedHandler}/>
-              </div>
-              <div className="file-path-wrapper">
-                <input className="file-path validate" type="text" defaultValue={image1} placeholder="Imagem da Capa 1"/>
-              </div>
-              <div>
-                {
-                  image1 ? <img className="responsive-img" src={image1} alt="" />
-                  :<img className="responsive-img" src={this.state.image1} alt="" />
-                }
-              </div>
-            </div>
+            <Row>
+              <Col s={9}>
+                <div className="file-field input-field">
+                  <div className="btn">
+                    <span>PDF</span>
+                    <input type="file" id="pdf" onChange={this.fileSelectedHandler}/>
+                  </div>
+                  <div className="file-path-wrapper">
+                    <input className="file-path validate" type="text" defaultValue={this.state.pdf} placeholder="PDF da Coleção"/>
+                  </div>
+                </div>
+              </Col>
+              <Col s={3}>
+                {this.state.pdf ?<a className="btn info right" href={this.state.pdf} target="_blank" rel="noopener noreferrer"> Ver PDF </a>:null}
+              </Col>
+            </Row>
 
-            <div className="file-field input-field">
-              <div className="btn">
-                <span>Capa 2</span>
-                <input type="file" id="image2" onChange={this.fileSelectedHandler}/>
+            <Row>
+              <div className="file-field input-field">
+                <Col s={6}>
+                  <div className="btn">
+                    <span>Capa 1</span>
+                    <input type="file" id="image1" onChange={this.fileSelectedHandler}/>
+                  </div>
+                  <div className="file-path-wrapper">
+                    <input className="file-path validate" type="text" defaultValue={image1} placeholder="Imagem da Capa 1"/>
+                  </div>
+                </Col>
+                <Col s={6}>
+                <div className="btn">
+                  <span>Capa 2</span>
+                  <input type="file" id="image2" onChange={this.fileSelectedHandler}/>
+                </div>
+                <div className="file-path-wrapper">
+                  <input className="file-path validate" type="text" defaultValue={image2} placeholder="Imagem da Capa 2"/>
+                </div>
+                </Col>
               </div>
-              <div className="file-path-wrapper">
-                <input className="file-path validate" type="text" defaultValue={image2} placeholder="Imagem da Capa 2"/>
+            </Row>
+
+            <Row>
+              <div className="file-field input-field images">
+                <Col s={6}>
+                  <div>
+                    {
+                      image1 ? <img className="responsive-img" src={image1} alt="" />
+                      :<img className="responsive-img" src={image1} alt="" />
+                    }
+                  </div>
+                </Col>
+                <Col s={6}>
+                <div>
+                  {
+                    image2 ? <img className="responsive-img" src={image2} alt="" />
+                    :<img className="responsive-img" src={image2} alt="" />
+                  }
+                  </div>
+                </Col>
               </div>
-              <div>
-              {
-                image2 ? <img className="responsive-img" src={image2} alt="" />
-                :<img className="responsive-img" src={image2} alt="" />
-              }
-              </div>
-            </div>
-            <div className="progress">
-              <div className="determinate" style={{width: this.state.uploadValue+"%"}}></div>
-            </div>
+            </Row>
 
             <div className="input-field">
               <button className="btn pink lighten-1 z-depth-0">Salvar</button>
@@ -152,7 +197,7 @@ class EditCollection extends Component {
     }else{
       return (
         <div className="container center">
-          <p>Loading collection...</p>
+          <p><Preloader color="yellow" size='small'/></p>
         </div>
       )
     }

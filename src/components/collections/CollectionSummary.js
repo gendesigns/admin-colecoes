@@ -57,6 +57,11 @@ const CollectionSummary = ({collection, deleteIdCollection, changeStatus}) => {
               icon='mode_edit'
             />
           </Link>
+          { collection.pdf ?
+            <a class="btn-floating btn-small waves-effect waves-light yellow" href={collection.pdf} target="_blank" rel="noopener noreferrer">
+              <i class="material-icons black-text">picture_as_pdf</i>
+            </a>: null
+          }
           <ReactTooltip id='deletar' type='error' effect='solid'>{}</ReactTooltip>
           <Button
             floating

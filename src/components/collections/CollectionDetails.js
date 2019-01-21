@@ -30,6 +30,15 @@ const CollectionDetails = (props) => {
               <p>{collection.description}</p>
             </div>
             <div className="row card-action lighten-4">
+
+              <span className="card-title">PDF da Cooleção</span>
+              {collection.pdf ?
+                <a className="btn info left" href={collection.pdf} target="_blank" rel="noopener noreferrer"> Ver PDF </a>:
+                <p>Sem PDF no momento.</p>
+              }
+
+            </div>
+            <div className="row card-action lighten-4">
               <div className="col s6">
                 <span className="card-title">Capa 1</span>
                 <img className="responsive-img" src={collection.image1} alt="" />
