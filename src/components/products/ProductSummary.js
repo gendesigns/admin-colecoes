@@ -14,8 +14,10 @@ const ProductSummary = ({product, deleteIdProduct, changeStatus}) => {
           <a href={`product/${product.id}`}><img className="responsive-img" src={product.image1} alt="" /></a>,
           <strong className="title-collection">Coleção {product.collectionTitle}</strong>
         ]}
-        title={`Ref: ${product.reference}`}
-
+        title={[
+          <p>Título: {product.title?product.title: <span className="red-text">Sem título</span>}</p>,
+          <p>Ref: {product.reference}</p>
+        ]}
         reveal={
           <div>
             <div className="card-content">

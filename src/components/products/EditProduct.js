@@ -94,6 +94,7 @@ class EditProduct extends Component {
     if (!auth.uid) return <Redirect to='/signin' />
 
     if (reference) {
+
       return (
         <div className="container">
           <form onSubmit={this.handleSubmit} className="white">

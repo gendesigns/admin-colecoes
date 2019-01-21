@@ -49,6 +49,12 @@ body {
   font-size: 13px;
   width: 100%;
   padding-left: 23px;
+  margin-top: -10px;
+}
+
+.product-list .card .card-content{
+  position: relative;
+  top: -10px;
 }
 
 .card .card-author{
