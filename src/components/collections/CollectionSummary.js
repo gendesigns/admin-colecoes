@@ -58,8 +58,8 @@ const CollectionSummary = ({collection, deleteIdCollection, changeStatus}) => {
             />
           </Link>
           { collection.pdf ?
-            <a class="btn-floating btn-small waves-effect waves-light yellow" href={collection.pdf} target="_blank" rel="noopener noreferrer">
-              <i class="material-icons black-text">picture_as_pdf</i>
+            <a className="btn-floating btn-small waves-effect waves-light yellow" href={collection.pdf} target="_blank" rel="noopener noreferrer">
+              <i className="material-icons black-text">picture_as_pdf</i>
             </a>: null
           }
           <ReactTooltip id='deletar' type='error' effect='solid'>{}</ReactTooltip>

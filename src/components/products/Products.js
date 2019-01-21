@@ -58,7 +58,6 @@ class Products extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state.firestore.ordered.products);
   return {
     products: state.firestore.ordered.products,
     auth: state.firebase.auth
