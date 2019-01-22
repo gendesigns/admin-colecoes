@@ -73,7 +73,7 @@ const mapDispatchToProps = (dispatch) => {
 
 export default compose(
   firestoreConnect([
-    { collection: 'products' }
+    { collection: 'products', limit: 4 }
   ]),
   connect(mapStateToProps, mapDispatchToProps)
 )(Products);
