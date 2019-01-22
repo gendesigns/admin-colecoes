@@ -41,6 +41,9 @@ body {
   max-width: 250px;
   max-height: 450px!important;
 }
+.product-list .card .card-content p{
+  line-height: 20px;
+}
 .product-list .card .card-content .card-title {
   font-size: 13px;
 }
