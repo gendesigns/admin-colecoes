@@ -12,7 +12,10 @@ const CollectionSummary = ({collection, deleteIdCollection, changeStatus}) => {
       <div className={collection.status==="inativo"? "card inativo" : "card"}>
         <div className="card-image">
           <a href={`/collection/${collection.id}`}>
-            <img src={collection.image1} alt="" />
+            { collection.image1?
+              <img src={collection.image1} alt="" />:
+              <img src="https://firebasestorage.googleapis.com/v0/b/rommanel-colecoes-e6383.appspot.com/o/covers%2Fgeneric-cover-1024x600.jpg?alt=media&token=d0ba75f1-05b5-4b21-a7ca-c1cda829a8be" alt="" />
+            }
             <span className="card-title">{collection.title}</span>
           </a>
         </div>
