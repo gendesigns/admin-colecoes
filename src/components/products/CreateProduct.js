@@ -158,6 +158,7 @@ class CreateProduct extends Component {
                 >
                 <option value='0'>Selecione uma familia</option>
                 <option value='Aço'>Aço</option>
+                <option value='Prata 925'>Prata 925</option>
                 <option value='Folheado a Ouro 18k'>Folheado a Ouro 18k</option>
                 <option value='Folheado a Rhodium'>Folheado a Rhodium</option>
                 <option value='Folheado a Rhodium Negro'>Folheado a Rhodium Negro</option>
