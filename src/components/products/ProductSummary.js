@@ -40,45 +40,13 @@ const ProductSummary = ({product, deleteIdProduct, changeStatus}) => {
               <p className="grey-text card-author">Cadastrado por {product.authorFirstName} {product.authorLastName}</p>
               <p className="grey-text card-date">{moment(product.createdAt.toDate().toString()).format('D/MM/YYYY - H:mm')}</p>
             </div>
-            <div className="card-action">
-              <ReactTooltip id='ver' type='success' effect='solid'>{}</ReactTooltip>
-              <a href={`product/${product.id}`} data-tip='Ver Coleção' data-for='ver'>
-                <Button
-                  floating
-                  small='true'
-                  className='green'
-                  waves='light'
-                  icon='remove_red_eye'
-                />
-              </a>
-              <ReactTooltip id='editar' type='info' effect='solid'>{}</ReactTooltip>
-              <Link to={`editProduct/${product.id}`} data-tip='Editar Coleção' data-for='editar'>
-                <Button
-                  floating
-                  small='true'
-                  className='blue'
-                  waves='light'
-                  icon='mode_edit'
-                />
-              </Link>
-              <ReactTooltip id='deletar' type='error' effect='solid'>{}</ReactTooltip>
-              <Button
-                floating
-                small='true'
-                data-tip='Deletar Coleção' data-for='deletar'
-                className="red"
-                waves='light'
-                icon='delete'
-                onClick={() => deleteIdProduct(product)}
-              />
-            </div>
           </div>
         }>
         <div>
 
             <div className="card-action">
               <ReactTooltip id='ver' type='success' effect='solid'>{}</ReactTooltip>
-              <a href={`product/${product.id}`} data-tip='Ver Coleção' data-for='ver'>
+              <a href={`product/${product.id}`} data-tip='Ver Produto' data-for='ver'>
                 <Button
                   floating
                   small='true'
@@ -88,7 +56,7 @@ const ProductSummary = ({product, deleteIdProduct, changeStatus}) => {
                 />
               </a>
               <ReactTooltip id='editar' type='info' effect='solid'>{}</ReactTooltip>
-              <Link to={`editProduct/${product.id}`} data-tip='Editar Coleção' data-for='editar'>
+              <Link to={`editProduct/${product.id}`} data-tip='Editar Produto' data-for='editar'>
                 <Button
                   floating
                   small='true'
@@ -101,7 +69,7 @@ const ProductSummary = ({product, deleteIdProduct, changeStatus}) => {
               <Button
                 floating
                 small='true'
-                data-tip='Deletar Coleção' data-for='deletar'
+                data-tip='Deletar Produto' data-for='deletar'
                 className="red"
                 waves='light'
                 icon='delete'

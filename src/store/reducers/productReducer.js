@@ -4,6 +4,7 @@ const productReducer = (state = initState, action) => {
   switch (action.type) {
     case 'CREATE_PRODUCT':
       console.log('created product', action.product);
+      window.Materialize.toast(`${action.product.title.toUpperCase()} ${action.product.reference.toUpperCase()} cadastrado com sucesso!`, 5000)
       return state;
     case 'CREATE_PRODUCT_ERROR':
       console.log('create product error', action.err);

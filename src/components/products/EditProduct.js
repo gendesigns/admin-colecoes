@@ -7,7 +7,7 @@ import { Redirect } from 'react-router-dom';
 import firebase from 'firebase/app';
 import 'firebase/storage';
 
-import { Row, Input } from 'react-materialize';
+import { Row, Input, Col } from 'react-materialize';
 
 class EditProduct extends Component {
   state = {
@@ -74,8 +74,6 @@ class EditProduct extends Component {
   }
 
   handleChange = (e) => {
-    // console.log(e.target.id);
-    // console.log(e.target.value);
     this.setState({
       [e.target.id]: e.target.value
     })
@@ -161,40 +159,58 @@ class EditProduct extends Component {
               </textarea>
             </div>
 
-            <div className="file-field input-field">
-              <div className="btn">
-                <span>Image do produto</span>
-                <input type="file" id="image1" onChange={this.fileSelectedHandler}/>
-              </div>
-              <div className="file-path-wrapper">
-                <input className="file-path validate" type="text" defaultValue={image1} placeholder="Imagem do produto"/>
-              </div>
-              <div>
-                {
-                  image1 ? <img className="responsive-img" src={image1} alt="" />
-                  :<img className="responsive-img" src={this.state.image1} alt="" />
-                }
-              </div>
-            </div>
-
-            <div className="file-field input-field">
-              <div className="btn">
-                <span>Image de uso</span>
-                <input type="file" id="image2" onChange={this.fileSelectedHandler}/>
-              </div>
-              <div className="file-path-wrapper">
-                <input className="file-path validate" type="text" defaultValue={image2} placeholder="Imagem de uso"/>
-              </div>
-              <div>
-              {
-                image2 ? <img className="responsive-img" src={image2} alt="" />
-                :<img className="responsive-img" src={image2} alt="" />
+            <Row>
+              {this.state.uploadValue === 0 || this.state.uploadValue===100 ? null :
+                <div className="col s12">
+                  <span>Carregando arquivo...</span>
+                  <div className="progress">
+                    <div className="determinate" style={{width: this.state.uploadValue+"%"}}></div>
+                  </div>
+                </div>
               }
-              </div>
-            </div>
-            <div className="progress">
-              <div className="determinate" style={{width: this.state.uploadValue+"%"}}></div>
-            </div>
+            </Row>
+            <Row>
+              <Col s={6}>
+                <div className="file-field input-field">
+                  <div className="btn">
+                    <span>Image do produto</span>
+                    <input type="file" id="image1" onChange={this.fileSelectedHandler}/>
+                  </div>
+                  <div className="file-path-wrapper">
+                    <input className="file-path validate" type="text" defaultValue={image1} placeholder="Imagem do produto"/>
+                  </div>
+                </div>
+              </Col>
+              <Col s={6}>
+                <div className="file-field input-field">
+                  <div className="btn">
+                    <span>Image de uso</span>
+                    <input type="file" id="image2" onChange={this.fileSelectedHandler}/>
+                  </div>
+                  <div className="file-path-wrapper">
+                    <input className="file-path validate" type="text" defaultValue={image2} placeholder="Imagem de uso"/>
+                  </div>
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col s={6}>
+                <div className="file-field input-field">
+                  {
+                    image1 ? <img className="responsive-img" src={image1} alt="" />
+                    :<img className="responsive-img" src={this.state.image1} alt="" />
+                  }
+                </div>
+              </Col>
+              <Col s={6}>
+                <div className="file-field input-field">
+                  {
+                    image2 ? <img className="responsive-img" src={image2} alt="" />
+                    :<img className="responsive-img" src={image2} alt="" />
+                  }
+                </div>
+              </Col>
+            </Row>
 
             <div className="input-field">
               <button className="btn pink lighten-1 z-depth-0">Atualizar</button>
