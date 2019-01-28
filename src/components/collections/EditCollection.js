@@ -145,8 +145,8 @@ class EditCollection extends Component {
             </Row>
 
             <Row>
-              <div className="file-field input-field">
-                <Col s={6}>
+              <Col s={6}>
+                <div className="file-field input-field">
                   <div className="btn">
                     <span>Capa 1</span>
                     <input type="file" id="image1" onChange={this.fileSelectedHandler}/>
@@ -154,38 +154,42 @@ class EditCollection extends Component {
                   <div className="file-path-wrapper">
                     <input className="file-path validate" type="text" defaultValue={image1} placeholder="Imagem da Capa 1"/>
                   </div>
-                </Col>
-                <Col s={6}>
-                <div className="btn">
-                  <span>Capa 2</span>
-                  <input type="file" id="image2" onChange={this.fileSelectedHandler}/>
                 </div>
-                <div className="file-path-wrapper">
-                  <input className="file-path validate" type="text" defaultValue={image2} placeholder="Imagem da Capa 2"/>
+              </Col>
+              <Col s={6}>
+                <div className="file-field input-field">
+                  <div className="btn">
+                    <span>Capa 2</span>
+                    <input type="file" id="image2" onChange={this.fileSelectedHandler}/>
+                  </div>
+                  <div className="file-path-wrapper">
+                    <input className="file-path validate" type="text" defaultValue={image2} placeholder="Imagem da Capa 2"/>
+                  </div>
                 </div>
-                </Col>
-              </div>
+              </Col>
             </Row>
 
             <Row>
-              <div className="file-field input-field images">
-                <Col s={6}>
+              <Col s={6}>
+                <div className="file-field input-field images">
                   <div>
                     {
                       image1 ? <img className="responsive-img" src={image1} alt="" />
                       :<img className="responsive-img" src={image1} alt="" />
                     }
                   </div>
-                </Col>
-                <Col s={6}>
-                <div>
-                  {
-                    image2 ? <img className="responsive-img" src={image2} alt="" />
-                    :<img className="responsive-img" src={image2} alt="" />
-                  }
+                </div>
+              </Col>
+              <Col s={6}>
+                <div className="file-field input-field images">
+                  <div>
+                    {
+                      image2 ? <img className="responsive-img" src={image2} alt="" />
+                      :<img className="responsive-img" src={image2} alt="" />
+                    }
                   </div>
-                </Col>
-              </div>
+                </div>
+              </Col>
             </Row>
 
             <div className="input-field">
