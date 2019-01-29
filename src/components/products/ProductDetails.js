@@ -7,8 +7,8 @@ import moment from 'moment';
 
 const ProductDetails = (props) => {
   const { product, auth } = props;
+  console.log(product);
   if (!auth.uid) return <Redirect to='/signin' />
-
   if (product) {
     return (
       <div className="container section product-details">
@@ -80,8 +80,11 @@ const mapStateToProps = (state, ownProps) => {
 
 export default compose(
   connect(mapStateToProps),
-  firestoreConnect([
-    { collection: 'products' }
-  ])
+  firestoreConnect((props) => {
+    console.log(props);
+    return [
+      { collection: 'products' }
+    ]
+})
 )(ProductDetails);
 

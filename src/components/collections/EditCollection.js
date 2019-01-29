@@ -16,7 +16,7 @@ class EditCollection extends Component {
     pdf: '',
     image1: '',
     image2: '',
-    uploadValue: 0
+    uploadValue: 70
   }
 
   componentDidMount() {
@@ -107,15 +107,6 @@ class EditCollection extends Component {
       return (
         <div className="container">
           <form onSubmit={this.handleSubmit} className="white">
-            {this.state.uploadValue === 0 || this.state.uploadValue===100 ? null :
-              <div>
-              <span>Carregando arquivo...</span>
-                <div className="progress">
-                  <div className="determinate" style={{width: this.state.uploadValue+"%"}}></div>
-                </div>
-              </div>
-            }
-
             <h5 className="grey-text text-darken-3">Editar Coleção</h5>
             <div className="input-field">
               {title ? null : <label htmlFor="title">Titulo</label>}
@@ -126,6 +117,19 @@ class EditCollection extends Component {
               <textarea id="description" cols="30" rows="10" className="materialize-textarea" value={description} onChange={this.handleChange}>
               </textarea>
             </div>
+
+            <Row>
+              <Col s={12}>
+                {this.state.uploadValue === 0 || this.state.uploadValue===100 ? null :
+                  <div>
+                  <span>Carregando arquivo...</span>
+                    <div className="progress">
+                      <div className="determinate" style={{width: this.state.uploadValue+"%"}}></div>
+                    </div>
+                  </div>
+                }
+              </Col>
+            </Row>
 
             <Row>
               <Col s={9}>

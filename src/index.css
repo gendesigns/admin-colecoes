@@ -41,6 +41,12 @@ body {
   max-width: 250px;
   max-height: 450px!important;
 }
+.product-list .card .card-action {
+  padding: 30px 3px;
+}
+.product-list .card .card-content .switch{
+  padding: 30px 0;
+}
 .product-list .card .card-content p{
   line-height: 20px;
 }
@@ -54,6 +60,8 @@ body {
   padding-left: 23px;
   margin-top: -10px;
 }
+
+
 
 .product-list .card .card-content{
   position: relative;
