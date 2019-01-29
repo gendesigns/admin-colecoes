@@ -39,7 +39,9 @@ body {
 }
 .product-list .card {
   max-width: 250px;
-  max-height: 450px!important;
+  height: 408px;
+  max-height: 408px!important;
+  min-height: 408px!important;
 }
 .product-list .card .card-action {
   padding: 30px 3px;
